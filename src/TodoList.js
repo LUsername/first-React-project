@@ -22,7 +22,7 @@ class TodoList extends Component{
     }
 
     handleKeyUp(e){
-        if(e.keyCode === 13){
+        if(e.keyCode === 13 && e.target.value !== ''){
             const list = [...this.state.list,this.state.inputValue];
             this.setState({
                 list,
@@ -44,14 +44,19 @@ class TodoList extends Component{
             <li 
                 key={index}
                 onClick={this.handleItemClick.bind(this,index)}
-            >{value}</li>)
+                dangerouslySetInnerHTML={{__html:value}}
+            ></li>)
         });
     }
 
     render(){
         return(
             <Fragment>
-                <input className='input'
+                {/* 这是jsx中的注释 */}
+                <label htmlFor="myinput">请输入内容：</label>
+                <input 
+                    id='myinput'
+                    className='input'
                     value={this.state.inputValue}
                     onChange={this.handleInputChange}
                     onKeyUp={this.handleKeyUp}
