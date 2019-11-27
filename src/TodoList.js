@@ -6,8 +6,8 @@ class TodoList extends Component{
         super(props);
         // 在组件中创建了两个数据，数据一定要定义在state中
         this.state = {
-            inputValue:'hello world',
-            list:[]
+            inputValue:'',
+            list:['learn React','learn Component','learn React-Dom']
         }
     }
 
@@ -17,16 +17,29 @@ class TodoList extends Component{
         })
     }
 
+    handleKeyUp(e){
+        if(e.keyCode === 13){
+            const list = [...this.state.list,this.state.inputValue];
+            this.setState({
+                list:list
+            })
+        }
+    }
+
     render(){
         return(
             <Fragment>
                 <input 
                     value={this.state.inputValue}
                     onChange={this.handleInputChange.bind(this)}
+                    onKeyUp={this.handleKeyUp.bind(this)}
                 ></input>
                 <ul>
-                    <li>learn React</li>
-                    <li>learn Component</li>
+                    {
+                        this.state.list.map((value,index)=>{
+                            return <li key={index}>{value}</li>
+                        })
+                    }
                 </ul>
             </Fragment>
         )
