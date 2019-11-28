@@ -9,6 +9,7 @@ class TodoList extends Component{
         // 优化一：避免因事件触发，同一函数多次生成
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.handleItemClick = this.handleItemClick.bind(this);
         // 在组件中创建了两个数据，数据一定要定义在state中
         this.state = {
             inputValue:'',
@@ -46,7 +47,9 @@ class TodoList extends Component{
             return (
                 <TodoItem 
                     content={value} 
+                    index = {index}
                     key={index}
+                    deleteFunction={this.handleItemClick}
                 />)
             // return (
             // <li 
